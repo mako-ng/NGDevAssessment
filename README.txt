@@ -30,7 +30,7 @@ REQUIRED tasks to complete:
 
          Example 1                 Example 2
 	 -----------------         -----------------
-      Mo 1/20 8 hours			Fr 1/17 8 hours
+      Mo 1/20 8 hours		Fr 1/17 8 hours
       Tu 1/21 8 hours           Sa 1/18 8 hours
       We 1/22 8 hours           Su 1/19 8 hours 
       Th 1/23 8 hours           Mo 1/20 8 hours
@@ -48,6 +48,9 @@ BONUS points:
 -------------
 1. Add validation to prevent two entries on the same day
 2. Use jQuery and ajax calls rather than full form POSTs and page re-rendering
+
+
+Lastly, please do not spend more than a few hours on this project.  We are trying to see to what kind of a "full-stack" developer you are and where your strengths lie, not if you are willing to spend a week to make things code-perfect and ready for a code review at Microsoft.
 
 
 When you are finished, please zip up your solution and send it back to us.
