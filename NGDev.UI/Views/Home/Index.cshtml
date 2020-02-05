@@ -1,0 +1,24 @@
+﻿@model TimesheetViewModel
+<h4>My Timesheet</h4>
+<p></p>
+<div class="row mt-6">
+    <div class="col-sm-6">
+        <div class="container-fluid timeentries">
+            <partial name="_TimeEntryHeader" />
+            @foreach (var timeEntry in Model.TimeEntries)
+            {
+                <partial name="_TimeEntry" model="@timeEntry" />
+            }
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col">
+        <button type="button" class="btn btn-light">Add new time entry</button>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col">
+        <button type="button" class="btn btn-light">Run payroll</button>
+    </div>
+</div>
