@@ -5,7 +5,7 @@
 Welcome to the Next Gen Developer Assessment.  The goal of this exercise is for you, the developer, to show off your full stack .NET skills.  In this solution, you will find stubbed out for you a very basic time keeping web site.  The solution is built on .NET Core 3.1 and uses a simple home-grown database "context" which reads/writes a JSON file.  If you need to change anything to get the project up and running (e.g. the version of .NET Core because you do not have 3.1 installed), feel free to do so.
 
 
-REQUIRED tasks to complete:
+REQUIRED tasks to complete: 
 ---------------------------
 1. Implement the incomplete methods of TimesheetService.cs
    
