@@ -9,7 +9,7 @@ In order to get up and running, you will need to do the following:
  - Open up the Package Manager Console, point your default project to NGDev.Persistence and run the "update-database" command.  
 
 
-REQUIRED tasks to complete:
+REQUIRED tasks to complete: 
 ---------------------------
 1. Implement the incomplete methods of TimesheetService.cs
    
