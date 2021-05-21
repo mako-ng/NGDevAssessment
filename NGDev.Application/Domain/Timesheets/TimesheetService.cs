@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NGDev.Domain.Timesheets.Models;
+﻿using NGDev.Domain.Timesheets.Models;
 using NGDev.Persistence;
 using System;
 using System.Collections.Generic;
@@ -20,14 +19,14 @@ namespace NGDev.Domain.Timesheets
 
         public async Task<IEnumerable<TimeEntryDetail>> GetTimesheetDetails()
         {
-            IEnumerable<TimeEntryDetail> entryList = await _db.TimeEntries.Select(t => new TimeEntryDetail
+            IEnumerable<TimeEntryDetail> entryList = _db.TimeEntries.Select(t => new TimeEntryDetail
             {
                 Id = t.Id,
                 Date = t.Date,
                 HoursWorked = t.HoursWorked
-            }).ToListAsync();
+            }).ToList();
 
-            return entryList;
+            return await Task.FromResult(entryList);
         }
 
         public Task AddTimeEntry(AddTimeEntryModel model)

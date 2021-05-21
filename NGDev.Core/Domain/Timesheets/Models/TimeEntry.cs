@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NGDev.Domain
+namespace NGDev.Domain.Timesheets.Models
 {
     public class TimeEntry
     {
