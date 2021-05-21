@@ -2,11 +2,7 @@
  Next Gen Developer Assessment
 -------------------------------
 
-Welcome to the Next Gen Developer Assessment.  The goal of this exercise is for you, the developer, to show off your full stack .NET skills.  In this solution, you will find stubbed out for you a very basic time keeping web site.  The solution is built upon .NET Core 2.1 and uses EF Core as its persistence layer (using localdb).  Please feel free to swap out the persistence layer if you do not have a local SQL db: anything will do (JSON file, in-memory) as long as it persists data for the exercise.  Also, if you need to change anything else to get up and running (e.g. the version of .NET Core because you do not have 2.1 installed), feel free to do so.
-
-In order to get up and running, you will need to do the following:
- - Make sure NGDev.UI is set as your startup project startup project
- - Open up the Package Manager Console, point your default project to NGDev.Persistence and run the "update-database" command.  
+Welcome to the Next Gen Developer Assessment.  The goal of this exercise is for you, the developer, to show off your full stack .NET skills.  In this solution, you will find stubbed out for you a very basic time keeping web site.  The solution is built on .NET Core 3.1 and uses a simple home-grown database "context" which reads/writes a JSON file.  If you need to change anything to get the project up and running (e.g. the version of .NET Core because you do not have 3.1 installed), feel free to do so.
 
 
 REQUIRED tasks to complete:
@@ -22,11 +18,11 @@ REQUIRED tasks to complete:
  Regular hours are all hours worked up until 40 for the work week.
  Overtime hours are all hours worked over 40 for the work week.
      
- For this exercise, a work week is seven consecutive days, starting on Sunday.
+ For this exercise, a "work week" is considered seven consecutive days, starting on Sunday at midnight.
 
          Example 1                 Example 2
      -----------------         -----------------
-      Mo 1/20 8 hours		Fr 1/17 8 hours
+      Mo 1/20 8 hours	         	Fr 1/17 8 hours
       Tu 1/21 8 hours           Sa 1/18 8 hours
       We 1/22 8 hours           Su 1/19 8 hours 
       Th 1/23 8 hours           Mo 1/20 8 hours
