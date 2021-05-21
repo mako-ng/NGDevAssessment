@@ -19,13 +19,13 @@ REQUIRED tasks to complete:
    
    c.) RunPayroll: run a calculation of the time entries.  We are looking for a count of regular hours and overtime hours.
 
-     Regular hours are all hours worked up until 40 for the work week.
-     Overtime hours are all hours worked over 40 for the work week.
+ Regular hours are all hours worked up until 40 for the work week.
+ Overtime hours are all hours worked over 40 for the work week.
      
-	 For this exercise, a work week is seven consecutive days, starting on Sunday.
+ For this exercise, a work week is seven consecutive days, starting on Sunday.
 
          Example 1                 Example 2
-	 -----------------         -----------------
+     -----------------         -----------------
       Mo 1/20 8 hours		Fr 1/17 8 hours
       Tu 1/21 8 hours           Sa 1/18 8 hours
       We 1/22 8 hours           Su 1/19 8 hours 
@@ -42,7 +42,7 @@ REQUIRED tasks to complete:
 BONUS points:
 -------------
 1. Add validation to prevent two entries on the same day
-2. Use jQuery and ajax calls rather than full form POSTs and page re-rendering
+2. Use jQuery or other JavaScript frameworks to make ajax calls rather than full form POSTs and page re-rendering
 
 
 Lastly, please do not spend more than a few hours on this project.  We are trying to see to what kind of a "full-stack" developer you are and where your strengths lie, not if you are willing to spend a week to make things code-perfect and ready for a code review at Microsoft.
