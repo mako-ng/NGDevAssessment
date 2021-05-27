@@ -31,7 +31,16 @@ namespace NGDev.Domain.Timesheets
 
         public Task AddTimeEntry(AddTimeEntryModel model)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            var TimeEntry = new TimeEntry
+                {
+                    Date = model.Date,
+                    HoursWorked = model.HoursWorked
+                };
+
+            _db.TimeEntries.Add(TimeEntry);
+            // _db.SaveChanges();
+            return Task.FromResult(TimeEntry);
         }
 
         public Task DeleteTimeEntry(DeleteTimeEntryModel model)
