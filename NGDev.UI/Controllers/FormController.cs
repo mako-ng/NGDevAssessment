@@ -21,6 +21,18 @@ namespace NGDev.UI.Controllers
         }
 
         [HttpGet]
+        [Route("gettimesheetentries")]
+        public async Task<IActionResult> GetTimesheetEntries()
+        {
+            IEnumerable<TimeEntryDetail> timeEntries = await _timesheetService.GetTimesheetDetails();
+            var model = new TimesheetViewModel
+            {
+                TimeEntries = timeEntries
+            };
+            return Ok(model);
+        }
+
+        [HttpGet]
         [Route("runpayroll")]
         public async Task<IActionResult> RunPayroll()
         {
