@@ -11,7 +11,8 @@ export class AppComponent {
   title = 'Angular-UI';
 
   apiURL = "https://localhost:5001/api/form/"
-  currEntries = [];
+  currEntries = null;
+  value = 'Clear me';
 
   constructor(
     public http: HttpClient
