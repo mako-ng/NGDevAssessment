@@ -49,24 +49,19 @@ namespace NGDev.Domain.Timesheets
         }
         public Task<PayrollResultsModel> RunPayroll()
         {
-            // throw new NotImplementedException();
-            // var groupedByMonth = _db.TimeEntries
-            //             .GroupBy(i => SqlFunctions.DatePart("week", i.Date));
-        // groupedByMonth.ForEach(Console.WriteLine);
-        // var weekly = _db.TimeEntries.Where(x => (long)(DateTime.Parse((x.Date).ToString()) - new DateTime(1970, 1, 1, 0, 0, 0)).TotalDays / 7 == (long)(DateTime.Now.ToLocalTime()- new DateTime(1970, 1, 1, 0, 0, 0)).TotalDays / 7).ToList();
-        var weekly = _db.TimeEntries.GroupBy(i => i.Date.StartOfWeek(DayOfWeek.Sunday));
+        var Weekly = _db.TimeEntries.GroupBy(i => i.Date.StartOfWeek(DayOfWeek.Sunday));
         Console.WriteLine("All entries");
-        string ListJson = JsonConvert.SerializeObject(weekly, Formatting.Indented);
+        string ListJson = JsonConvert.SerializeObject(Weekly, Formatting.Indented);
         Console.WriteLine(ListJson);
         Decimal RegularHours = 0;
         Decimal OverTimeHours = 0;
-        foreach(var p in weekly)
+        foreach(var Week in Weekly)
         {
             Decimal RegularHoursPerWeek = 0;
             Decimal OverTimeHoursPerWeek = 0;
-            foreach(var entry in p)
+            foreach(var Entry in Week)
             {
-                RegularHoursPerWeek += entry.HoursWorked;
+                RegularHoursPerWeek += Entry.HoursWorked;
             }
             if (RegularHoursPerWeek >= 40)
             {
@@ -75,9 +70,9 @@ namespace NGDev.Domain.Timesheets
             }
             RegularHours += RegularHoursPerWeek;
             OverTimeHours += OverTimeHoursPerWeek;
-            string json = JsonConvert.SerializeObject(p, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(Week, Formatting.Indented);
             Console.WriteLine("date");
-            Console.WriteLine(p);
+            Console.WriteLine(Week);
             Console.WriteLine(json);
         }
         Console.WriteLine(RegularHours);
