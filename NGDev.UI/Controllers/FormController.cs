@@ -24,21 +24,15 @@ namespace NGDev.UI.Controllers
         [Route("runpayroll")]
         public async Task<IActionResult> RunPayroll()
         {
-            // var model = new PayrollResultsModel
-            // {
-            //     RegularHours = 1,
-            //     OvertimeHours = 0
-            // };
-            await _timesheetService.RunPayroll();
-            return Ok(1);
+            var result = await _timesheetService.RunPayroll();
+            return Ok(result);
+            // Add try catch
         }
 
         [HttpGet]
+        // Might need to be post
         [Route("add")]
-        public async Task<IActionResult> Add(
-            DateTime Date,
-            decimal HoursWorked
-        )
+        public async Task<IActionResult> Add(DateTime Date, decimal HoursWorked)
         {
             var model = new AddTimeEntryModel
             {
@@ -47,13 +41,12 @@ namespace NGDev.UI.Controllers
             };
             await _timesheetService.AddTimeEntry(model);
             return Ok(1);
+            // Add try catch
         }
 
         [HttpGet]
         [Route("delete")]
-        public async Task<IActionResult> Delete(
-            int Id
-        )
+        public async Task<IActionResult> Delete(int Id)
         {
             var model = new DeleteTimeEntryModel
             {
@@ -61,6 +54,7 @@ namespace NGDev.UI.Controllers
             };
             await _timesheetService.DeleteTimeEntry(model);
             return Ok(1);
+            // Add try catch
         }
     }
 }
