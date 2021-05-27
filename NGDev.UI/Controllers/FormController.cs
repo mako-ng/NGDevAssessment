@@ -32,5 +32,35 @@ namespace NGDev.UI.Controllers
             await _timesheetService.RunPayroll();
             return Ok(1);
         }
+
+        [HttpGet]
+        [Route("add")]
+        public async Task<IActionResult> Add(
+            DateTime Date,
+            decimal HoursWorked
+        )
+        {
+            var model = new AddTimeEntryModel
+            {
+                Date = Date,
+                HoursWorked = HoursWorked
+            };
+            await _timesheetService.AddTimeEntry(model);
+            return Ok(1);
+        }
+
+        [HttpGet]
+        [Route("delete")]
+        public async Task<IActionResult> Delete(
+            int Id
+        )
+        {
+            var model = new DeleteTimeEntryModel
+            {
+                Id = Id
+            };
+            await _timesheetService.DeleteTimeEntry(model);
+            return Ok(1);
+        }
     }
 }

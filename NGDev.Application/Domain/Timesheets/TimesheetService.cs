@@ -27,14 +27,15 @@ namespace NGDev.Domain.Timesheets
         }
         public Task AddTimeEntry(AddTimeEntryModel model)
         {
-            // throw new NotImplementedException();
+            // Get last ID in DB to increment
+            var LastId = _db.TimeEntries.OrderByDescending(p => p.Id).FirstOrDefault().Id;
             var TimeEntry = new TimeEntry
                 {
+                    Id = LastId + 1,
                     Date = model.Date,
                     HoursWorked = model.HoursWorked
                 };
             _db.TimeEntries.Add(TimeEntry);
-            // _db.SaveChanges();
             return Task.FromResult(TimeEntry);
         }
         public Task DeleteTimeEntry(DeleteTimeEntryModel model)
