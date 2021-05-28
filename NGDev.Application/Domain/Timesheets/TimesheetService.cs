@@ -27,6 +27,14 @@ namespace NGDev.Domain.Timesheets
         }
         public Task AddTimeEntry(AddTimeEntryModel model)
         {
+            var entryToUpdate = _db.TimeEntries.Where(p=> p.Date == model.Date).FirstOrDefault();
+
+            if (entryToUpdate != null)
+            {
+                entryToUpdate.HoursWorked = model.HoursWorked;
+                return Task.FromResult(entryToUpdate);
+            }
+
             // Get last ID in DB to increment
             var LastId = _db.TimeEntries.OrderByDescending(p => p.Id).FirstOrDefault().Id;
             var TimeEntry = new TimeEntry
