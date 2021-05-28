@@ -1,7 +1,16 @@
-<div *ngFor="let entry of currEntries">
-  <!-- <mat-label></mat-label> -->
-  <input matInput [matDatepicker]="picker" [(ngModel)]="entry.date">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-  <input matInput type="text" [(ngModel)]="entry.hoursWorked">
-</div>
+<mat-card id=background>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-card-title>Date</mat-card-title>
+    <mat-card-title>Hours</mat-card-title>
+  </div>
+  <mat-card id="demo-card" *ngFor="let entry of currEntries">
+    <mat-card-content class="card-content">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="entry.date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <input matInput type="text" [(ngModel)]="entry.hoursWorked">
+      <mat-icon id="close-icon" >close</mat-icon>
+    </mat-card-content>
+  </mat-card>
+  <button mat-buton (click)="addEntry()">Add Entry</button>
+</mat-card>

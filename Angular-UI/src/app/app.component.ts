@@ -5,13 +5,13 @@ import { Observable, Subject, BehaviorSubject} from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'Angular-UI';
 
   apiURL = "https://localhost:5001/api/form/"
-  currEntries = null;
+  currEntries: any [] = [];
   value = 'Clear me';
 
   constructor(
@@ -27,6 +27,12 @@ export class AppComponent {
 
   public get<T>(url: string, params?: any): Observable<T> {
     return this.http.get<T>(url, {params: params});
+  }
+
+  public addEntry() {
+    if (this.currEntries != null) {
+      this.currEntries.push({});
+    }
   }
 
   public runPayroll() {
