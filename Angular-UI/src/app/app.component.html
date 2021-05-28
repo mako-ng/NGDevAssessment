@@ -12,5 +12,8 @@
       <mat-icon id="close-icon" >close</mat-icon>
     </mat-card-content>
   </mat-card>
-  <button mat-buton (click)="addEntry()">Add Entry</button>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-buton (click)="addEntry()">Add Entry</button>
+    <button mat-buton (click)="runPayroll()">Run Payroll</button>
+  </div>
 </mat-card>

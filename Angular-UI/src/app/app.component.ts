@@ -37,5 +37,6 @@ export class AppComponent {
 
   public runPayroll() {
     // on payroll button click
+    console.log(this.currEntries);
   }
 }
