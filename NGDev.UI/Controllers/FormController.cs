@@ -88,10 +88,11 @@ namespace NGDev.UI.Controllers
             // Add try catch
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("delete")]
-        public async Task<IActionResult> Delete(int Id)
+        public async Task<IActionResult> Delete([FromBody] int Id)
         {
+            Console.WriteLine(Id);
             var model = new DeleteTimeEntryModel
             {
                 Id = Id

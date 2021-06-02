@@ -40,7 +40,12 @@ export class AppComponent {
   }
 
   public deleteEntry(index: any) {
-    this.currEntries.splice(index,1);
+    console.log(this.currEntries[index].id);
+    this.http.post(this.apiURL + "delete", this.currEntries[index].id).subscribe((res:any) => {
+      if (res) {
+        this.currEntries.splice(index,1);
+      }
+    })
   }
 
   public runPayroll() {
