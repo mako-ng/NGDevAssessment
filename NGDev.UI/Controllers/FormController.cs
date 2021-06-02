@@ -40,24 +40,36 @@ namespace NGDev.UI.Controllers
         [Route("runpayroll")]
         public async Task<IActionResult> RunPayroll()
         {
-            var result = await _timesheetService.RunPayroll();
-            return Ok(result);
-            // Add try catch
+            try
+            {
+                var result = await _timesheetService.RunPayroll();
+                return Ok(result);
+            }
+            catch(Exception Ex)
+            {  
+                return BadRequest(Ex);
+            }
         }
 
         [HttpPost]
-        // Might need to be post
         [Route("add")]
         public async Task<IActionResult> Add(DateTime Date, decimal HoursWorked)
         {
-            var model = new AddTimeEntryModel
+            try 
             {
-                Date = Date,
-                HoursWorked = HoursWorked
-            };
-            await _timesheetService.AddTimeEntry(model);
+                var model = new AddTimeEntryModel
+                {
+                    Date = Date,
+                    HoursWorked = HoursWorked
+                };
+                var result = _timesheetService.AddTimeEntry(model);
+                await result;
+            }
+            catch(Exception Ex)
+            {
+                return BadRequest(Ex);
+            }
             return Ok(1);
-            // Add try catch
         }
 
         [HttpPost]
@@ -65,41 +77,49 @@ namespace NGDev.UI.Controllers
         public async Task<IActionResult> Update(EntryListModel request)
         {
             Console.WriteLine("Params: ");
-            // Console.WriteLine(request[0]);
-            // foreach(var entry in request.Entries) {
-            //     string json = JsonConvert.SerializeObject(entry, Formatting.Indented);
-            //     Console.WriteLine(json);
-            // }
             string json = JsonConvert.SerializeObject(request, Formatting.Indented);
             Console.WriteLine(json);
-            
-            foreach(var Entry in request.Entries)
+            try 
             {
-                Console.WriteLine("Update");
-                Console.WriteLine(Entry);
-                var model = new AddTimeEntryModel
+                foreach(var Entry in request.Entries)
                 {
-                    Date = Entry.Date,
-                    HoursWorked = Entry.HoursWorked
-                };
-                await _timesheetService.AddTimeEntry(model);
+                    Console.WriteLine("Update");
+                    Console.WriteLine(Entry);
+                    var model = new AddTimeEntryModel
+                    {
+                        Date = Entry.Date,
+                        HoursWorked = Entry.HoursWorked
+                    };
+                    var result = _timesheetService.AddTimeEntry(model);
+                    await result;
+                }
+                return Ok(1);
             }
-            return Ok(1);
-            // Add try catch
+            catch(Exception Ex)
+            {
+                return BadRequest(Ex);
+            }
         }
 
         [HttpPost]
         [Route("delete")]
         public async Task<IActionResult> Delete([FromBody] int Id)
         {
-            Console.WriteLine(Id);
-            var model = new DeleteTimeEntryModel
+            try
             {
-                Id = Id
-            };
-            await _timesheetService.DeleteTimeEntry(model);
-            return Ok(1);
-            // Add try catch
+                Console.WriteLine(Id);
+                var model = new DeleteTimeEntryModel
+                {
+                    Id = Id
+                };
+                var result =  _timesheetService.DeleteTimeEntry(model);
+                await result;
+                return Ok(result);
+            }
+            catch(Exception Ex)
+            {
+                return BadRequest(Ex);
+            }
         }
     }
 }

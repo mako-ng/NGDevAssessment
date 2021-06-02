@@ -117,7 +117,6 @@ namespace NGDev.Domain.Timesheets
             {
                 Task.FromResult(Ex);
             }
-
             return Task.FromResult(PayrollResults);
         }
     }
