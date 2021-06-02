@@ -59,13 +59,7 @@ export class AppComponent {
   }
 
   public scrubEntries() {
-    for (let i = 0; i < this.currEntries.length; i++) {
-      if (!this.currEntries[i].hoursWorked || !this.currEntries[i].date) {
-        console.log("Removed");
-        console.log(this.currEntries[i])
-        this.currEntries.splice(i, 1);
-      }
-    }
+      this.currEntries = this.currEntries.filter(item => (item.date));
   }
 
   public runPayroll() {
