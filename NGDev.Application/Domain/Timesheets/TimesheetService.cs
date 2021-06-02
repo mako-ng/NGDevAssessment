@@ -27,77 +27,98 @@ namespace NGDev.Domain.Timesheets
         }
         public Task AddTimeEntry(AddTimeEntryModel model)
         {
-            var entryToUpdate = _db.TimeEntries.Where(p=> p.Date == model.Date).FirstOrDefault();
+            var TimeEntry = new TimeEntry();
 
-            if (entryToUpdate != null)
-            {
-                entryToUpdate.HoursWorked = model.HoursWorked;
-                return Task.FromResult(entryToUpdate);
-            }
-
-            // Get last ID in DB to increment
-            var LastId = 0;
             try {
-                LastId = _db.TimeEntries.OrderByDescending(p => p.Id).FirstOrDefault().Id;
-            }
-            catch {
-                // var LastId = 0;
-            }
-            
-            var TimeEntry = new TimeEntry
+                var entryToUpdate = _db.TimeEntries.Where(p=> p.Date == model.Date).FirstOrDefault();
+
+                if (entryToUpdate != null)
                 {
-                    Id = LastId + 1,
-                    Date = model.Date,
-                    HoursWorked = model.HoursWorked
-                };
-            _db.TimeEntries.Add(TimeEntry);
+                    entryToUpdate.HoursWorked = model.HoursWorked;
+                    return Task.FromResult(entryToUpdate);
+                }
+
+                // Get last ID in DB to increment
+                var LastId = 0;
+                    LastId = _db.TimeEntries.OrderByDescending(p => p.Id).FirstOrDefault().Id;
+                    // var LastId = 0;
+                
+                TimeEntry = new TimeEntry
+                    {
+                        Id = LastId + 1,
+                        Date = model.Date,
+                        HoursWorked = model.HoursWorked
+                    };
+                _db.TimeEntries.Add(TimeEntry);
+            }
+
+            catch (Exception Ex)
+            {
+                return Task.FromResult(Ex);
+            }
             return Task.FromResult(TimeEntry);
         }
         public Task DeleteTimeEntry(DeleteTimeEntryModel model)
         {
-            // throw new NotImplementedException();
-            var EntryToDelete = _db.TimeEntries.Where(entry => entry.Id == model.Id).FirstOrDefault();
-            if (EntryToDelete != null)
+            var EntryToDelete = new TimeEntry();
+            try 
             {
-                _db.TimeEntries.Remove(EntryToDelete);
+                EntryToDelete = _db.TimeEntries.Where(entry => entry.Id == model.Id).FirstOrDefault();
+                if (EntryToDelete != null)
+                {
+                    _db.TimeEntries.Remove(EntryToDelete);
+                }
+            }
+            catch(Exception Ex)
+            {
+                Task.FromResult(Ex);
             }
             return Task.FromResult(EntryToDelete);
         }
         public Task<PayrollResultsModel> RunPayroll()
         {
-        var Weekly = _db.TimeEntries.GroupBy(i => i.Date.StartOfWeek(DayOfWeek.Sunday));
-        Console.WriteLine("All entries");
-        string ListJson = JsonConvert.SerializeObject(Weekly, Formatting.Indented);
-        Console.WriteLine(ListJson);
-        Decimal RegularHours = 0;
-        Decimal OverTimeHours = 0;
-        foreach(var Week in Weekly)
-        {
-            Decimal RegularHoursPerWeek = 0;
-            Decimal OverTimeHoursPerWeek = 0;
-            foreach(var Entry in Week)
+            var PayrollResults = new PayrollResultsModel();
+            try
             {
-                RegularHoursPerWeek += Entry.HoursWorked;
+                var Weekly = _db.TimeEntries.GroupBy(i => i.Date.StartOfWeek(DayOfWeek.Sunday));
+                Console.WriteLine("All entries");
+                string ListJson = JsonConvert.SerializeObject(Weekly, Formatting.Indented);
+                Console.WriteLine(ListJson);
+                Decimal RegularHours = 0;
+                Decimal OverTimeHours = 0;
+                foreach(var Week in Weekly)
+                {
+                    Decimal RegularHoursPerWeek = 0;
+                    Decimal OverTimeHoursPerWeek = 0;
+                    foreach(var Entry in Week)
+                    {
+                        RegularHoursPerWeek += Entry.HoursWorked;
+                    }
+                    if (RegularHoursPerWeek >= 40)
+                    {
+                        OverTimeHoursPerWeek = RegularHoursPerWeek - 40;
+                        RegularHoursPerWeek = 40;
+                    }
+                    RegularHours += RegularHoursPerWeek;
+                    OverTimeHours += OverTimeHoursPerWeek;
+                    string json = JsonConvert.SerializeObject(Week, Formatting.Indented);
+                    Console.WriteLine("date");
+                    Console.WriteLine(Week);
+                    Console.WriteLine(json);
+                }
+                Console.WriteLine(RegularHours);
+                Console.WriteLine(OverTimeHours);
+                PayrollResults = new PayrollResultsModel{
+                    RegularHours = RegularHours,
+                    OvertimeHours = OverTimeHours
+                };
             }
-            if (RegularHoursPerWeek >= 40)
+            catch(Exception Ex)
             {
-                OverTimeHoursPerWeek = RegularHoursPerWeek - 40;
-                RegularHoursPerWeek = 40;
+                Task.FromResult(Ex);
             }
-            RegularHours += RegularHoursPerWeek;
-            OverTimeHours += OverTimeHoursPerWeek;
-            string json = JsonConvert.SerializeObject(Week, Formatting.Indented);
-            Console.WriteLine("date");
-            Console.WriteLine(Week);
-            Console.WriteLine(json);
-        }
-        Console.WriteLine(RegularHours);
-        Console.WriteLine(OverTimeHours);
-        var PayrollResults = new PayrollResultsModel{
-            RegularHours = RegularHours,
-            OvertimeHours = OverTimeHours
-        };
-        return Task.FromResult(PayrollResults);
+
+            return Task.FromResult(PayrollResults);
         }
     }
 }
