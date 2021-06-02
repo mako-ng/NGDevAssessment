@@ -14,6 +14,11 @@ requested by the new UI.
 To run:
 Angular UI: Run the existing .NET project. Then `cd Angular-UI`, install the dependencies using `npm i` (make sure node is installed), and run using `ng serve`. Navigate to http://localhost:4200/ for viewing.
 
+Note:
+If you don't have the Angular CLI installed locally, install using `npm install @angular/cli`. <-- Might want to sudo that
+If you don't have typescript, get that with `npm i -g typescript`.
+Also, the new API uses a secure protocol, so you will need self-signed dev certs. Get those using `dotnet dev-certs https`.
+
 Implemented:
 UI
 A basic Angular material form UI which includes a date selector, numerical hours input, and buttons for various function (deletion, add entry, run payroll).
