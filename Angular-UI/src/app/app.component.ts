@@ -39,8 +39,8 @@ export class AppComponent {
     }
   }
 
-  public deleteEntry() {
-
+  public deleteEntry(index: any) {
+    this.currEntries.splice(index,1);
   }
 
   public runPayroll() {
