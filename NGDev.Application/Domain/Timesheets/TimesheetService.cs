@@ -86,7 +86,10 @@ namespace NGDev.Domain.Timesheets
         }
         Console.WriteLine(RegularHours);
         Console.WriteLine(OverTimeHours);
-        var PayrollResults = new PayrollResultsModel{};
+        var PayrollResults = new PayrollResultsModel{
+            RegularHours = RegularHours,
+            OvertimeHours = OverTimeHours
+        };
         return Task.FromResult(PayrollResults);
         }
     }

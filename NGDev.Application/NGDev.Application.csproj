@@ -7,6 +7,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8"/>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8"/>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+    <PackageReference Include="System.Collections" Version="4.3.0"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NGDev.Core\NGDev.Core.csproj"/>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpResponse, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject} from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,14 @@ export class AppComponent {
   value = 'Clear me';
 
   constructor(
-    public http: HttpClient
+    public http: HttpClient,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.get(this.apiURL + "gettimesheetentries").subscribe((res: any) => {
+      console.log(typeof(res));
+      console.log(typeof(res.timeEntries));
       console.log(res);
       this.currEntries = res.timeEntries;
     });
@@ -35,8 +39,31 @@ export class AppComponent {
     }
   }
 
+  public deleteEntry() {
+
+  }
+
   public runPayroll() {
     // on payroll button click
-    console.log(this.currEntries);
+    const params = new URLSearchParams();
+    var header = new HttpHeaders({ 'content-type': 'application/json; charset=utf-8', 'dataType': 'json'});
+    var entries = JSON.stringify({"entries": this.currEntries});
+    console.log(entries);
+    this.http.post(this.apiURL + "update", entries, { headers: header }).subscribe((res: any) => {
+      console.log(res);
+      if (res) {
+        this.http.get(this.apiURL + "runpayroll").subscribe((res:any) => {
+          console.log(res);
+          this.openSnackBar('Regular Hours: ' + res.regularHours + '\n' + 'Overtime Hours: ' + res.overtimeHours);
+        });
+      }
+    });
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "close", {
+      duration: 8000,
+      panelClass: ['success-snackbar']
+    });
   }
 }
