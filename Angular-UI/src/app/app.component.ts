@@ -33,14 +33,24 @@ export class AppComponent {
     return this.http.get<T>(url, {params: params});
   }
 
+  public getLastId() {
+    var max = -Infinity, x;
+    for( x in this.currEntries) {
+      if( this.currEntries[x].id > max) max = this.currEntries[x].id;
+    }
+    return max;
+  }
+
   public addEntry() {
     if (this.currEntries != null) {
-      this.currEntries.push({});
+      this.currEntries.push({
+        id: this.getLastId() + 1
+      });
     }
   }
 
   public deleteEntry(index: any) {
-    console.log(this.currEntries[index].id);
+    console.log(this.currEntries);
     this.http.post(this.apiURL + "delete", this.currEntries[index].id).subscribe((res:any) => {
       if (res) {
         this.currEntries.splice(index,1);
