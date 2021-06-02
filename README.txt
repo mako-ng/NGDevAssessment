@@ -2,6 +2,38 @@
  Next Gen Developer Assessment
 -------------------------------
 
+-------------------------
+Baker Griffith's Changes:
+-------------------------
+
+New structure:
+There now exists an Angular project within the root file structure (Angular-UI). This was built to replicate the existing functionality of the MVC site and
+to implement the desired new functionality. There is also a new forwar-facing API structure (formcontroller.cs) which contains endpoints for all SCRUM needs
+requested by the new UI.
+
+To run:
+Angular UI: Run the existing .NET project. Then `cd Angular-UI`, install the dependencies using `npm i` (make sure node is installed), and run using `ng serve`. Navigate to http://localhost:4200/ for viewing.
+
+Note:
+If you don't have the Angular CLI installed locally, install using `npm install @angular/cli`. <-- Might want to sudo that
+If you don't have typescript, get that with `npm i -g typescript`.
+Also, the new API uses a secure protocol, so you will need self-signed dev certs. Get those using `dotnet dev-certs https`.
+
+Implemented:
+UI
+A basic Angular material form UI which includes a date selector, numerical hours input, and buttons for various function (deletion, add entry, run payroll).
+All aspects populate dynamically based on input (deletion happens in real-time, etc.). When you submit the payroll, it runs a request through the front facing API
+and shows a popup of the calculation at the bottom of the screen. This appears for 8 seconds and is closeable.
+
+API
+As oppsed to a standard MVC controller, a new ASP Web API controller was constructed for the front end to use. This routes requests to the necesarry endpoints
+which then utilizes the DB functions in the TimesheetService for data read/write. Exception handling was added to the service as well as to each action method
+in the new controller, they will return 404s when bad requests are committed. Pertaining to the bonus points section, when a request comes in for the same date,
+the previous value is updated with the new data.
+
+This should cover all of the required functionality as well as bonus points and then also demonstrate an understanding of JavaScript and frameworks.
+
+
 Welcome to the Next Gen Developer Assessment.  The goal of this exercise is for you, the developer, to show off your full stack .NET skills.  In this solution, you will find stubbed out for you a very basic time keeping web site.  The solution is built on .NET Core 3.1 and uses a simple home-grown database "context" which reads/writes a JSON file.  If you need to change anything to get the project up and running (e.g. the version of .NET Core because you do not have 3.1 installed), feel free to do so.
 
 

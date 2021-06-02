@@ -47,7 +47,12 @@ namespace NGDev.UI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+
+            app.UseHttpsRedirection(); 
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseRouting();

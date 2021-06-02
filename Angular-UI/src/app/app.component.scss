@@ -1,0 +1,33 @@
+#demo-card {
+    padding-top: 10px;
+    width: fit-content;
+    margin-bottom: 10px;
+    opacity: 1;
+}
+
+#close-icon {
+    cursor: pointer;
+}
+
+#background {
+    opacity: 1;
+    width: fit-content;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+#title {
+    margin-top: 20px ;
+}
+
+.card-modal {
+    cursor: move;
+}
+
+.card-content {
+    cursor: auto;
+}
+
+::ng-deep .success-snackbar {
+    white-space: pre-wrap;
+}
