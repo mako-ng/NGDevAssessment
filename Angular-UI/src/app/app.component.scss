@@ -6,9 +6,6 @@
 }
 
 #close-icon {
-    float: right;
-    left: 2%;
-    top: -28px;
     cursor: pointer;
 }
 
@@ -17,6 +14,10 @@
     width: fit-content;
     margin-top: 25px;
     margin-left: 25px;
+}
+
+#title {
+    margin-top: 20px ;
 }
 
 .card-modal {
@@ -28,12 +29,5 @@
 }
 
 ::ng-deep .success-snackbar {
-    white-space: pre-wrap
-  }
-
-// input {
-//     background-color: white;
-//     // opacity: 0.9;
-//     padding: 10px;
-//     border-radius: 5px;
-// }
+    white-space: pre-wrap;
+}

@@ -58,12 +58,21 @@ export class AppComponent {
     })
   }
 
+  public scrubEntries() {
+    for (let i = 0; i < this.currEntries.length; i++) {
+      if (!this.currEntries[i].hoursWorked || !this.currEntries[i].date) {
+        console.log("Removed");
+        console.log(this.currEntries[i])
+        this.currEntries.splice(i, 1);
+      }
+    }
+  }
+
   public runPayroll() {
     // on payroll button click
-    const params = new URLSearchParams();
     var header = new HttpHeaders({ 'content-type': 'application/json; charset=utf-8', 'dataType': 'json'});
+    this.scrubEntries();
     var entries = JSON.stringify({"entries": this.currEntries});
-    console.log(entries);
     this.http.post(this.apiURL + "update", entries, { headers: header }).subscribe((res: any) => {
       console.log(res);
       if (res) {

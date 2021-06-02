@@ -14,6 +14,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatInputModule} from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider';
 @NgModule({
   declarations: [
     AppComponent
@@ -32,7 +33,8 @@ import {MatInputModule} from '@angular/material/input';
     FlexLayoutModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatInputModule
+    MatInputModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
