@@ -34,7 +34,7 @@ export class AppComponent {
   }
 
   public getLastId() {
-    var max = -Infinity, x;
+    var max = 0, x;
     for( x in this.currEntries) {
       if( this.currEntries[x].id > max) max = this.currEntries[x].id;
     }
@@ -76,6 +76,7 @@ export class AppComponent {
   }
 
   openSnackBar(message: string) {
+    // Popup displaying hours info
     this._snackBar.open(message, "close", {
       duration: 8000,
       panelClass: ['success-snackbar']

@@ -36,7 +36,14 @@ namespace NGDev.Domain.Timesheets
             }
 
             // Get last ID in DB to increment
-            var LastId = _db.TimeEntries.OrderByDescending(p => p.Id).FirstOrDefault().Id;
+            var LastId = 0;
+            try {
+                LastId = _db.TimeEntries.OrderByDescending(p => p.Id).FirstOrDefault().Id;
+            }
+            catch {
+                // var LastId = 0;
+            }
+            
             var TimeEntry = new TimeEntry
                 {
                     Id = LastId + 1,
